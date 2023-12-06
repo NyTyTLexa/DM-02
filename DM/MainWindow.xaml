@@ -1,0 +1,106 @@
+﻿<Window x:Class="DM.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:DM"
+        mc:Ignorable="d"
+        Title="MainWindow" Height="280" Width="400" ResizeMode="NoResize" WindowStyle="None" WindowStartupLocation="CenterScreen" AllowsTransparency="True" >
+    <Window.Resources>
+        <Style TargetType="Border">
+            <Setter Property="CornerRadius" Value="0,10,10,0"></Setter>
+        </Style>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="40"></RowDefinition>
+            <RowDefinition Height="2"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+            <RowDefinition Height="80"></RowDefinition>
+
+            <RowDefinition Height="*"></RowDefinition>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="50*"></ColumnDefinition>
+            <ColumnDefinition Width="300"></ColumnDefinition>
+            <ColumnDefinition Width="50*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Grid Grid.ColumnSpan="3" Grid.RowSpan="16"  Name="Grid">
+            <Border  BorderBrush="Black" BorderThickness="1,1" Background="Transparent" CornerRadius="10,10,10,0"></Border>
+        </Grid>
+        <Grid Grid.Row="0" Grid.ColumnSpan="3" MouseDown="Grid_MouseDown" >
+            <Button  HorizontalAlignment="Left" FontSize="17" Name="Roll" Click="Roll_Click" BorderThickness="0,0.5" Background="#FF349C3D" Margin="350,1,0,0" Foreground="Black" BorderBrush="#FF92D050" Content="-" Width="25" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="1,0,0,1"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+            <Button HorizontalAlignment="Left" Name="Close" Click="Close_Click" FontSize="14" BorderThickness="0.5" Background="#FF349C3D"  Margin="375,1,0,0" Foreground="Black" BorderBrush="#FF92D050" Content="×" Width="24" >
+                <Button.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="0,9,1,0"></Setter>
+                    </Style>
+                </Button.Resources>
+            </Button>
+
+            <TextBlock Text="Авторизация" Background="#FF92D050" FontSize="24" TextAlignment="Center" Margin="1,1,50,0" >
+                <TextBlock.Resources>
+                    <Style TargetType="Border">
+                        <Setter Property="CornerRadius" Value="9,9,0,0"></Setter>
+                    </Style>
+                </TextBlock.Resources>
+            </TextBlock>
+            <Image Source="Resource\logo.png" Margin="1,1,345,1" >
+            </Image>
+        </Grid>
+        <Grid Background="#FF349C3D" Grid.Row="1" Grid.ColumnSpan="3" Margin="1,0,1,0"/>
+        <TextBlock Grid.Row="2" VerticalAlignment="Center" Text="Введите логин:" FontSize="25" Margin="33,0,116,0" Grid.ColumnSpan="2" TextAlignment="Right"/>
+        <TextBox Grid.Row="2" Grid.Column="1" HorizontalAlignment="Left" VerticalAlignment="Center" Name="Login" MaxLength="30" FontSize="20" Margin="184,0,0,0" Width="106" Height="35" BorderThickness="0,0,0,2" BorderBrush="Black">
+        </TextBox>
+        <TextBlock Grid.Row="3" VerticalAlignment="Center" Text="Введите пароль:" FontSize="25" Margin="33,0,116,0" Grid.ColumnSpan="2"/>
+        <TextBox Grid.Row="3" Grid.Column="1" MaxLength="12" HorizontalAlignment="Left" Name="PasswordOpen" VerticalAlignment="Center" FontSize="18" Margin="184,0,0,0" Width="106" Height="35" BorderThickness="0,0,0,2" BorderBrush="Black">
+            </TextBox>
+            <PasswordBox Grid.Row="3" Grid.Column="1" MaxLength="12" HorizontalAlignment="Left" Name="PasswordClose" VerticalAlignment="Center" FontSize="18" Margin="184,0,0,0" Width="106" Height="35" BorderThickness="0,0,0,2" BorderBrush="Black">
+        </PasswordBox>
+        <Button Grid.Row="4" Grid.Column="1" Margin="10" Background="#FF92D050" FontSize="25" Name="Autorization" Click="Autorization_Click" Content="Вход">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"></Setter>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <TextBlock></TextBlock>
+        <TextBox Grid.Row="6" Grid.Column="1" VerticalAlignment="Center" Name="EnterCaptcha" GotMouseCapture="EnterCaptcha_GotMouseCapture" FontSize="20"  Margin="10" BorderBrush="Black" BorderThickness="0,0,0,2" />
+        <TextBlock Grid.Row="5" Grid.Column="1" FontSize="30" Name="CaptchaTb" VerticalAlignment="Center" TextAlignment="Center" HorizontalAlignment="Center" Width="280" Height="48" >
+        </TextBlock>
+        <Canvas Grid.Row="5" Grid.Column="1" Name="CaptchaImage"  Margin="10">
+            
+        </Canvas>
+
+
+        <Button Grid.Row="5" Grid.Column="2" VerticalAlignment="Center" Name="DuplicateCaptch" Click="DuplicateCaptch_Click" Height="33" Margin="5,0,5,0" Background="#FF92D050"  Content="🔄" Foreground="White" FontSize="21">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"></Setter>
+                </Style>
+            </Button.Resources>
+        </Button>
+        <Button Grid.Row="3" Grid.Column="2" Margin="5" VerticalAlignment="Center" Height="44" Background="Transparent" Name="PasswordImage" Click="PasswordOpen_Click" BorderBrush="Transparent">
+            <Image Name="ImageEye" Source="Resource\eyeClose.png"></Image>
+        </Button>
+        <Button Grid.Row="7" Grid.Column="1" Margin="10" Background="#FF92D050" FontSize="25" Name="Accept" Click="Accept_Click" Content="Подтвердить">
+            <Button.Resources>
+                <Style TargetType="Border">
+                    <Setter Property="CornerRadius" Value="10"></Setter>
+                </Style>
+            </Button.Resources>
+        </Button>
+
+    
+        
+    </Grid>
+</Window>

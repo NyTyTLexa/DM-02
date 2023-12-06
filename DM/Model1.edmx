@@ -1,0 +1,974 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="Хранилище Model" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Sname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SeriosPassport" Type="int" Nullable="false" />
+          <Property Name="NumberPassport" Type="int" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="Index" Type="int" Nullable="false" />
+          <Property Name="City_id" Type="int" Nullable="false" />
+          <Property Name="Street_id" Type="int" Nullable="false" />
+          <Property Name="House" Type="int" Nullable="false" />
+          <Property Name="Flat" Type="int" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="post_id" Type="int" Nullable="false" />
+          <Property Name="Sname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="History_Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Id_employe" Type="int" Nullable="false" />
+          <Property Name="Date" Type="datetime" />
+          <Property Name="id_input" Type="int" Nullable="false" />
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+        </EntityType>
+        <EntityType Name="OrderB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="time" Type="time" Precision="7" Nullable="false" />
+          <Property Name="Code_client" Type="int" Nullable="false" />
+          <Property Name="Status" Type="int" Nullable="false" />
+          <Property Name="Date_close" Type="date" />
+          <Property Name="Cost" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="code_service" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="cost" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DM-GorbatenkoAD.dbo.ServiceandOrder" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ServiceandOrder">
+          <Key>
+            <PropertyRef Name="Code_Order" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Code_client" />
+            <PropertyRef Name="Order" />
+          </Key>
+          <Property Name="Code_Order" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="Code_client" Type="int" Nullable="false" />
+          <Property Name="Service" Type="int" />
+          <Property Name="Order" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="Street">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+          <Property Name="principal_id" Type="int" Nullable="false" />
+          <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="version" Type="int" />
+          <Property Name="definition" Type="varbinary(max)" />
+        </EntityType>
+        <EntityType Name="Type_input">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="int" Nullable="false" />
+          <Property Name="Title" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DM-GorbatenkoAD.dbo.AdminWindow" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="AdminWindow">
+          <Key>
+            <PropertyRef Name="Номер_Заказа" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="Номер_Заказа" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Услуги" Type="nvarchar" MaxLength="4000" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Date" Type="date" Nullable="false" />
+          <Property Name="ОбщаяСтоимость" Type="int" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DM-GorbatenkoAD.dbo.ClientManager" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="ClientManager">
+          <Key>
+            <PropertyRef Name="Sname" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Fname" />
+            <PropertyRef Name="SeriosPassport" />
+            <PropertyRef Name="NumberPassport" />
+            <PropertyRef Name="DateOfBirth" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="Street" />
+            <PropertyRef Name="Flat" />
+            <PropertyRef Name="House" />
+          </Key>
+          <Property Name="Sname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Name" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Fname" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="SeriosPassport" Type="int" Nullable="false" />
+          <Property Name="NumberPassport" Type="int" Nullable="false" />
+          <Property Name="DateOfBirth" Type="date" Nullable="false" />
+          <Property Name="Email" Type="nvarchar(max)" Nullable="false" />
+          <Property Name="City" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Street" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="Flat" Type="int" Nullable="false" />
+          <Property Name="House" Type="int" Nullable="false" />
+        </EntityType>
+        <!--Ошибки, обнаруженные при создании:
+предупреждение 6002: В таблице или представлении "DM-GorbatenkoAD.dbo.HistoryAdminWindow" не определен первичный ключ. Ключ был выведен, а определение таблицы или представления было создано в режиме только для чтения.-->
+        <EntityType Name="HistoryAdminWindow">
+          <Key>
+            <PropertyRef Name="Вход" />
+            <PropertyRef Name="FIO" />
+            <PropertyRef Name="LoginPassword" />
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Дата" Type="datetime" />
+          <Property Name="Вход" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FIO" Type="nvarchar" MaxLength="152" Nullable="false" />
+          <Property Name="LoginPassword" Type="nvarchar" MaxLength="117" Nullable="false" />
+          <Property Name="Login" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_Client_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="City_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Street">
+          <End Role="Street" Type="Self.Street" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Street">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="Street_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="post_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Employee_Employee">
+          <End Role="Employee" Type="Self.Employee" Multiplicity="1" />
+          <End Role="History_Employee" Type="Self.History_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="History_Employee">
+              <PropertyRef Name="Id_employe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Employee_Type_input">
+          <End Role="Type_input" Type="Self.Type_input" Multiplicity="1" />
+          <End Role="History_Employee" Type="Self.History_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_input">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="History_Employee">
+              <PropertyRef Name="id_input" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderB_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="OrderB" Type="Self.OrderB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderB">
+              <PropertyRef Name="Code_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderB_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="OrderB" Type="Self.OrderB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderB">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceandOrder_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="ServiceandOrder" Type="Self.ServiceandOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ServiceandOrder">
+              <PropertyRef Name="Code_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceandOrder_OrderB">
+          <End Role="OrderB" Type="Self.OrderB" Multiplicity="1" />
+          <End Role="ServiceandOrder" Type="Self.ServiceandOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ServiceandOrder">
+              <PropertyRef Name="Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceandOrder_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
+          <End Role="ServiceandOrder" Type="Self.ServiceandOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ServiceandOrder">
+              <PropertyRef Name="Service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище ModelContainer">
+          <EntitySet Name="City" EntityType="Self.City" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Client" EntityType="Self.Client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="History_Employee" EntityType="Self.History_Employee" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="OrderB" EntityType="Self.OrderB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Post" EntityType="Self.Post" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Service" EntityType="Self.Service" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Status" EntityType="Self.Status" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Street" EntityType="Self.Street" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Type_input" EntityType="Self.Type_input" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="ServiceandOrder" EntityType="Self.ServiceandOrder" store:Type="Tables" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ServiceandOrder].[Code_Order] AS [Code_Order], 
+    [ServiceandOrder].[Date] AS [Date], 
+    [ServiceandOrder].[Code_client] AS [Code_client], 
+    [ServiceandOrder].[Service] AS [Service], 
+    [ServiceandOrder].[Order] AS [Order]
+    FROM [dbo].[ServiceandOrder] AS [ServiceandOrder]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="AdminWindow" EntityType="Self.AdminWindow" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [AdminWindow].[Номер_Заказа] AS [Номер_Заказа], 
+    [AdminWindow].[Услуги] AS [Услуги], 
+    [AdminWindow].[Email] AS [Email], 
+    [AdminWindow].[Password] AS [Password], 
+    [AdminWindow].[Date] AS [Date], 
+    [AdminWindow].[ОбщаяСтоимость] AS [ОбщаяСтоимость]
+    FROM [dbo].[AdminWindow] AS [AdminWindow]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="ClientManager" EntityType="Self.ClientManager" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [ClientManager].[Sname] AS [Sname], 
+    [ClientManager].[Name] AS [Name], 
+    [ClientManager].[Fname] AS [Fname], 
+    [ClientManager].[SeriosPassport] AS [SeriosPassport], 
+    [ClientManager].[NumberPassport] AS [NumberPassport], 
+    [ClientManager].[DateOfBirth] AS [DateOfBirth], 
+    [ClientManager].[Email] AS [Email], 
+    [ClientManager].[City] AS [City], 
+    [ClientManager].[Street] AS [Street], 
+    [ClientManager].[Flat] AS [Flat], 
+    [ClientManager].[House] AS [House]
+    FROM [dbo].[ClientManager] AS [ClientManager]</DefiningQuery>
+          </EntitySet>
+          <EntitySet Name="HistoryAdminWindow" EntityType="Self.HistoryAdminWindow" store:Type="Views" store:Schema="dbo">
+            <DefiningQuery>SELECT 
+    [HistoryAdminWindow].[Дата] AS [Дата], 
+    [HistoryAdminWindow].[Вход] AS [Вход], 
+    [HistoryAdminWindow].[FIO] AS [FIO], 
+    [HistoryAdminWindow].[LoginPassword] AS [LoginPassword], 
+    [HistoryAdminWindow].[Login] AS [Login]
+    FROM [dbo].[HistoryAdminWindow] AS [HistoryAdminWindow]</DefiningQuery>
+          </EntitySet>
+          <AssociationSet Name="FK_Client_City" Association="Self.FK_Client_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Street" Association="Self.FK_Client_Street">
+            <End Role="Street" EntitySet="Street" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Post" Association="Self.FK_Employee_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Employee_Employee" Association="Self.FK_History_Employee_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="History_Employee" EntitySet="History_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Employee_Type_input" Association="Self.FK_History_Employee_Type_input">
+            <End Role="Type_input" EntitySet="Type_input" />
+            <End Role="History_Employee" EntitySet="History_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderB_Client" Association="Self.FK_OrderB_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="OrderB" EntitySet="OrderB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderB_Status" Association="Self.FK_OrderB_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="OrderB" EntitySet="OrderB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceandOrder_Client" Association="Self.FK_ServiceandOrder_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ServiceandOrder" EntitySet="ServiceandOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceandOrder_OrderB" Association="Self.FK_ServiceandOrder_OrderB">
+            <End Role="OrderB" EntitySet="OrderB" />
+            <End Role="ServiceandOrder" EntitySet="ServiceandOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceandOrder_Service" Association="Self.FK_ServiceandOrder_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceandOrder" EntitySet="ServiceandOrder" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="Model" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="City">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client_City" FromRole="City" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="Client">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Sname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="SeriosPassport" Type="Int32" Nullable="false" />
+          <Property Name="NumberPassport" Type="Int32" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Index" Type="Int32" Nullable="false" />
+          <Property Name="City_id" Type="Int32" Nullable="false" />
+          <Property Name="Street_id" Type="Int32" Nullable="false" />
+          <Property Name="House" Type="Int32" Nullable="false" />
+          <Property Name="Flat" Type="Int32" Nullable="false" />
+          <Property Name="Email" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="City" Relationship="Self.FK_Client_City" FromRole="Client" ToRole="City" />
+          <NavigationProperty Name="Street" Relationship="Self.FK_Client_Street" FromRole="Client" ToRole="Street" />
+          <NavigationProperty Name="OrderB" Relationship="Self.FK_OrderB_Client" FromRole="Client" ToRole="OrderB" />
+          <NavigationProperty Name="ServiceandOrder" Relationship="Self.FK_ServiceandOrder_Client" FromRole="Client" ToRole="ServiceandOrder" />
+        </EntityType>
+        <EntityType Name="Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="post_id" Type="Int32" Nullable="false" />
+          <Property Name="Sname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Fname" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Login" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Post" Relationship="Self.FK_Employee_Post" FromRole="Employee" ToRole="Post" />
+          <NavigationProperty Name="History_Employee" Relationship="Model.FK_History_Employee_Employee" FromRole="Employee" ToRole="History_Employee" />
+          </EntityType>
+        <EntityType Name="OrderB">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="time" Type="Time" Nullable="false" Precision="7" />
+          <Property Name="Code_client" Type="Int32" Nullable="false" />
+          <Property Name="Status" Type="Int32" Nullable="false" />
+          <Property Name="Date_close" Type="DateTime" Precision="0" />
+          <Property Name="Cost" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_OrderB_Client" FromRole="OrderB" ToRole="Client" />
+          <NavigationProperty Name="Status1" Relationship="Self.FK_OrderB_Status" FromRole="OrderB" ToRole="Status" />
+          <NavigationProperty Name="ServiceandOrder" Relationship="Self.FK_ServiceandOrder_OrderB" FromRole="OrderB" ToRole="ServiceandOrder" />
+        </EntityType>
+        <EntityType Name="Post">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Employee" Relationship="Self.FK_Employee_Post" FromRole="Post" ToRole="Employee" />
+        </EntityType>
+        <EntityType Name="Service">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="name" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="code_service" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="cost" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="ServiceandOrder" Relationship="Self.FK_ServiceandOrder_Service" FromRole="Service" ToRole="ServiceandOrder" />
+        </EntityType>
+        <EntityType Name="Status">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="OrderB" Relationship="Self.FK_OrderB_Status" FromRole="Status" ToRole="OrderB" />
+        </EntityType>
+        <EntityType Name="Street">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_Client_Street" FromRole="Street" ToRole="Client" />
+        </EntityType>
+        <EntityType Name="sysdiagrams">
+          <Key>
+            <PropertyRef Name="diagram_id" />
+          </Key>
+          <Property Name="name" Type="String" MaxLength="128" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="principal_id" Type="Int32" Nullable="false" />
+          <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="version" Type="Int32" />
+          <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+        </EntityType>
+        <EntityType Name="Type_input">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="ID" Type="Int32" Nullable="false" />
+          <Property Name="Title" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="History_Employee" Relationship="Model.FK_History_Employee_Type_input" FromRole="Type_input" ToRole="History_Employee" />
+          </EntityType>
+        <EntityType Name="ServiceandOrder">
+          <Key>
+            <PropertyRef Name="Code_Order" />
+            <PropertyRef Name="Date" />
+            <PropertyRef Name="Code_client" />
+            <PropertyRef Name="Order" />
+          </Key>
+          <Property Name="Code_Order" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Code_client" Type="Int32" Nullable="false" />
+          <Property Name="Service" Type="Int32" />
+          <Property Name="Order" Type="Int32" Nullable="false" />
+          <NavigationProperty Name="Client" Relationship="Self.FK_ServiceandOrder_Client" FromRole="ServiceandOrder" ToRole="Client" />
+          <NavigationProperty Name="OrderB" Relationship="Self.FK_ServiceandOrder_OrderB" FromRole="ServiceandOrder" ToRole="OrderB" />
+          <NavigationProperty Name="Service1" Relationship="Self.FK_ServiceandOrder_Service" FromRole="ServiceandOrder" ToRole="Service" />
+        </EntityType>
+        <Association Name="FK_Client_City">
+          <End Role="City" Type="Self.City" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="City">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="City_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Client_Street">
+          <End Role="Street" Type="Self.Street" Multiplicity="1" />
+          <End Role="Client" Type="Self.Client" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Street">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Client">
+              <PropertyRef Name="Street_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderB_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="OrderB" Type="Self.OrderB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderB">
+              <PropertyRef Name="Code_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceandOrder_Client">
+          <End Role="Client" Type="Self.Client" Multiplicity="1" />
+          <End Role="ServiceandOrder" Type="Self.ServiceandOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Client">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ServiceandOrder">
+              <PropertyRef Name="Code_client" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Employee_Post">
+          <End Role="Post" Type="Self.Post" Multiplicity="1" />
+          <End Role="Employee" Type="Self.Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Post">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="Employee">
+              <PropertyRef Name="post_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_OrderB_Status">
+          <End Role="Status" Type="Self.Status" Multiplicity="1" />
+          <End Role="OrderB" Type="Self.OrderB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Status">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="OrderB">
+              <PropertyRef Name="Status" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceandOrder_OrderB">
+          <End Role="OrderB" Type="Self.OrderB" Multiplicity="1" />
+          <End Role="ServiceandOrder" Type="Self.ServiceandOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="OrderB">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ServiceandOrder">
+              <PropertyRef Name="Order" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ServiceandOrder_Service">
+          <End Role="Service" Type="Self.Service" Multiplicity="0..1" />
+          <End Role="ServiceandOrder" Type="Self.ServiceandOrder" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Service">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="ServiceandOrder">
+              <PropertyRef Name="Service" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Entities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="City" EntityType="Self.City" />
+          <EntitySet Name="Client" EntityType="Self.Client" />
+          <EntitySet Name="Employee" EntityType="Self.Employee" />
+          <EntitySet Name="OrderB" EntityType="Self.OrderB" />
+          <EntitySet Name="Post" EntityType="Self.Post" />
+          <EntitySet Name="Service" EntityType="Self.Service" />
+          <EntitySet Name="Status" EntityType="Self.Status" />
+          <EntitySet Name="Street" EntityType="Self.Street" />
+          <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" />
+          <EntitySet Name="Type_input" EntityType="Self.Type_input" />
+          <EntitySet Name="ServiceandOrder" EntityType="Self.ServiceandOrder" />
+          <AssociationSet Name="FK_Client_City" Association="Self.FK_Client_City">
+            <End Role="City" EntitySet="City" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Client_Street" Association="Self.FK_Client_Street">
+            <End Role="Street" EntitySet="Street" />
+            <End Role="Client" EntitySet="Client" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderB_Client" Association="Self.FK_OrderB_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="OrderB" EntitySet="OrderB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceandOrder_Client" Association="Self.FK_ServiceandOrder_Client">
+            <End Role="Client" EntitySet="Client" />
+            <End Role="ServiceandOrder" EntitySet="ServiceandOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Employee_Post" Association="Self.FK_Employee_Post">
+            <End Role="Post" EntitySet="Post" />
+            <End Role="Employee" EntitySet="Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_OrderB_Status" Association="Self.FK_OrderB_Status">
+            <End Role="Status" EntitySet="Status" />
+            <End Role="OrderB" EntitySet="OrderB" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceandOrder_OrderB" Association="Self.FK_ServiceandOrder_OrderB">
+            <End Role="OrderB" EntitySet="OrderB" />
+            <End Role="ServiceandOrder" EntitySet="ServiceandOrder" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ServiceandOrder_Service" Association="Self.FK_ServiceandOrder_Service">
+            <End Role="Service" EntitySet="Service" />
+            <End Role="ServiceandOrder" EntitySet="ServiceandOrder" />
+          </AssociationSet>
+          <EntitySet Name="AdminWindow" EntityType="Model.AdminWindow" />
+          <EntitySet Name="History_Employee" EntityType="Model.History_Employee" />
+          <AssociationSet Name="FK_History_Employee_Employee" Association="Model.FK_History_Employee_Employee">
+            <End Role="Employee" EntitySet="Employee" />
+            <End Role="History_Employee" EntitySet="History_Employee" />
+          </AssociationSet>
+          <AssociationSet Name="FK_History_Employee_Type_input" Association="Model.FK_History_Employee_Type_input">
+            <End Role="Type_input" EntitySet="Type_input" />
+            <End Role="History_Employee" EntitySet="History_Employee" />
+          </AssociationSet>
+          <EntitySet Name="HistoryAdminWindow" EntityType="Model.HistoryAdminWindow" />
+          <EntitySet Name="ClientManager" EntityType="Model.ClientManager" />
+          </EntityContainer>
+        <EntityType Name="AdminWindow">
+          <Key>
+            <PropertyRef Name="Номер_Заказа" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="Password" />
+            <PropertyRef Name="Date" />
+          </Key>
+          <Property Name="Номер_Заказа" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Услуги" Type="String" MaxLength="4000" FixedLength="false" Unicode="true" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Date" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="ОбщаяСтоимость" Type="Int32" />
+        </EntityType>
+        <EntityType Name="History_Employee">
+          <Key>
+            <PropertyRef Name="ID" />
+          </Key>
+          <Property Name="Id_employe" Type="Int32" Nullable="false" />
+          <Property Name="Date" Type="DateTime" Precision="3" />
+          <Property Name="id_input" Type="Int32" Nullable="false" />
+          <Property Name="ID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <NavigationProperty Name="Employee" Relationship="Model.FK_History_Employee_Employee" FromRole="History_Employee" ToRole="Employee" />
+          <NavigationProperty Name="Type_input" Relationship="Model.FK_History_Employee_Type_input" FromRole="History_Employee" ToRole="Type_input" />
+        </EntityType>
+        <Association Name="FK_History_Employee_Employee">
+          <End Type="Model.Employee" Role="Employee" Multiplicity="1" />
+          <End Type="Model.History_Employee" Role="History_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Employee">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="History_Employee">
+              <PropertyRef Name="Id_employe" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_History_Employee_Type_input">
+          <End Type="Model.Type_input" Role="Type_input" Multiplicity="1" />
+          <End Type="Model.History_Employee" Role="History_Employee" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Type_input">
+              <PropertyRef Name="ID" />
+            </Principal>
+            <Dependent Role="History_Employee">
+              <PropertyRef Name="id_input" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="HistoryAdminWindow">
+          <Key>
+            <PropertyRef Name="Вход" />
+            <PropertyRef Name="FIO" />
+            <PropertyRef Name="LoginPassword" />
+            <PropertyRef Name="Login" />
+          </Key>
+          <Property Name="Дата" Type="DateTime" Precision="3" />
+          <Property Name="Вход" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="FIO" Type="String" Nullable="false" MaxLength="152" FixedLength="false" Unicode="true" />
+          <Property Name="LoginPassword" Type="String" Nullable="false" MaxLength="117" FixedLength="false" Unicode="true" />
+          <Property Name="Login" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="ClientManager">
+          <Key>
+            <PropertyRef Name="Sname" />
+            <PropertyRef Name="Name" />
+            <PropertyRef Name="Fname" />
+            <PropertyRef Name="SeriosPassport" />
+            <PropertyRef Name="NumberPassport" />
+            <PropertyRef Name="DateOfBirth" />
+            <PropertyRef Name="Email" />
+            <PropertyRef Name="City" />
+            <PropertyRef Name="Street" />
+            <PropertyRef Name="Flat" />
+            <PropertyRef Name="House" />
+          </Key>
+          <Property Name="Sname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Fname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="SeriosPassport" Type="Int32" Nullable="false" />
+          <Property Name="NumberPassport" Type="Int32" Nullable="false" />
+          <Property Name="DateOfBirth" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="Email" Type="String" Nullable="false" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="City" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Street" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Flat" Type="Int32" Nullable="false" />
+          <Property Name="House" Type="Int32" Nullable="false" />
+        </EntityType>
+        </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище ModelContainer" CdmEntityContainer="Entities">
+          <EntitySetMapping Name="City">
+            <EntityTypeMapping TypeName="Model.City">
+              <MappingFragment StoreEntitySet="City">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Client">
+            <EntityTypeMapping TypeName="Model.Client">
+              <MappingFragment StoreEntitySet="Client">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Sname" ColumnName="Sname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="SeriosPassport" ColumnName="SeriosPassport" />
+                <ScalarProperty Name="NumberPassport" ColumnName="NumberPassport" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="Index" ColumnName="Index" />
+                <ScalarProperty Name="City_id" ColumnName="City_id" />
+                <ScalarProperty Name="Street_id" ColumnName="Street_id" />
+                <ScalarProperty Name="House" ColumnName="House" />
+                <ScalarProperty Name="Flat" ColumnName="Flat" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employee">
+            <EntityTypeMapping TypeName="Model.Employee">
+              <MappingFragment StoreEntitySet="Employee">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="post_id" ColumnName="post_id" />
+                <ScalarProperty Name="Sname" ColumnName="Sname" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="OrderB">
+            <EntityTypeMapping TypeName="Model.OrderB">
+              <MappingFragment StoreEntitySet="OrderB">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="time" ColumnName="time" />
+                <ScalarProperty Name="Code_client" ColumnName="Code_client" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+                <ScalarProperty Name="Date_close" ColumnName="Date_close" />
+                <ScalarProperty Name="Cost" ColumnName="Cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Post">
+            <EntityTypeMapping TypeName="Model.Post">
+              <MappingFragment StoreEntitySet="Post">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Service">
+            <EntityTypeMapping TypeName="Model.Service">
+              <MappingFragment StoreEntitySet="Service">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="code_service" ColumnName="code_service" />
+                <ScalarProperty Name="cost" ColumnName="cost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Status">
+            <EntityTypeMapping TypeName="Model.Status">
+              <MappingFragment StoreEntitySet="Status">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Street">
+            <EntityTypeMapping TypeName="Model.Street">
+              <MappingFragment StoreEntitySet="Street">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="sysdiagrams">
+            <EntityTypeMapping TypeName="Model.sysdiagrams">
+              <MappingFragment StoreEntitySet="sysdiagrams">
+                <ScalarProperty Name="name" ColumnName="name" />
+                <ScalarProperty Name="principal_id" ColumnName="principal_id" />
+                <ScalarProperty Name="diagram_id" ColumnName="diagram_id" />
+                <ScalarProperty Name="version" ColumnName="version" />
+                <ScalarProperty Name="definition" ColumnName="definition" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Type_input">
+            <EntityTypeMapping TypeName="Model.Type_input">
+              <MappingFragment StoreEntitySet="Type_input">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ServiceandOrder">
+            <EntityTypeMapping TypeName="Model.ServiceandOrder">
+              <MappingFragment StoreEntitySet="ServiceandOrder">
+                <ScalarProperty Name="Code_Order" ColumnName="Code_Order" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Code_client" ColumnName="Code_client" />
+                <ScalarProperty Name="Service" ColumnName="Service" />
+                <ScalarProperty Name="Order" ColumnName="Order" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="AdminWindow">
+            <EntityTypeMapping TypeName="Model.AdminWindow">
+              <MappingFragment StoreEntitySet="AdminWindow">
+                <ScalarProperty Name="ОбщаяСтоимость" ColumnName="ОбщаяСтоимость" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="Услуги" ColumnName="Услуги" />
+                <ScalarProperty Name="Номер_Заказа" ColumnName="Номер_Заказа" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="History_Employee">
+            <EntityTypeMapping TypeName="Model.History_Employee">
+              <MappingFragment StoreEntitySet="History_Employee">
+                <ScalarProperty Name="ID" ColumnName="ID" />
+                <ScalarProperty Name="id_input" ColumnName="id_input" />
+                <ScalarProperty Name="Date" ColumnName="Date" />
+                <ScalarProperty Name="Id_employe" ColumnName="Id_employe" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="HistoryAdminWindow">
+            <EntityTypeMapping TypeName="Model.HistoryAdminWindow">
+              <MappingFragment StoreEntitySet="HistoryAdminWindow">
+                <ScalarProperty Name="Login" ColumnName="Login" />
+                <ScalarProperty Name="LoginPassword" ColumnName="LoginPassword" />
+                <ScalarProperty Name="FIO" ColumnName="FIO" />
+                <ScalarProperty Name="Вход" ColumnName="Вход" />
+                <ScalarProperty Name="Дата" ColumnName="Дата" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ClientManager">
+            <EntityTypeMapping TypeName="Model.ClientManager">
+              <MappingFragment StoreEntitySet="ClientManager">
+                <ScalarProperty Name="House" ColumnName="House" />
+                <ScalarProperty Name="Flat" ColumnName="Flat" />
+                <ScalarProperty Name="Street" ColumnName="Street" />
+                <ScalarProperty Name="City" ColumnName="City" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+                <ScalarProperty Name="NumberPassport" ColumnName="NumberPassport" />
+                <ScalarProperty Name="SeriosPassport" ColumnName="SeriosPassport" />
+                <ScalarProperty Name="Fname" ColumnName="Fname" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="Sname" ColumnName="Sname" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
